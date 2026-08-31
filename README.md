@@ -35,6 +35,6 @@ Start it with:
 docker compose -p web-yanoa up -d --build
 ```
 
-Shared Caddy routes `portal.greenfield.yanoa.be` to `web-yanoa:8080` during
+Shared Caddy routes `greenfield.yanoa.be` to `web-yanoa:8080` during
 acceptance. Production `yanoa.be` DNS and routing remain unchanged until the
 documented cutover gates have passed.
