@@ -163,8 +163,24 @@ h1 {
 }
 
 .social-links .astrobin-link svg path {
+  stroke: currentColor;
+}
+
+.social-links .astrobin-link svg {
+  width: 1.65rem;
+}
+
+.social-links .astrobin-link .astrobin-box,
+.social-links .astrobin-link .astrobin-planet,
+.social-links .astrobin-link .astrobin-a {
   fill: currentColor;
   stroke: none;
+}
+
+.social-links .astrobin-link .astrobin-ring {
+  fill: none;
+  stroke: white;
+  stroke-width: 2.5;
 }
 
 .apps-action {
