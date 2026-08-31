@@ -43,6 +43,23 @@ class PortalTests(unittest.TestCase):
         }
         self.assertTrue(expected.issubset(set(self.parser.links)))
 
+    def test_personal_identity_and_contact_are_primary_content(self):
+        for text in (
+            "Dirk Smeets",
+            "Engineer",
+            "Astrophotographer",
+            "Radio amateur",
+            "mailto:dirk.smeets@yanoa.be",
+            "tel:+32476691902",
+        ):
+            self.assertIn(text, self.source)
+
+        self.assertTrue((ROOT / "site" / "assets" / "dirk.jpg").is_file())
+        stylesheet = (ROOT / "site" / "assets" / "styles.css").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn('/assets/dirk.jpg', stylesheet)
+
     def test_unrelated_hosted_sites_are_absent(self):
         lowered = self.source.lower()
         for excluded in ("dechapper", "chapper.be", "zonhoven-united"):
