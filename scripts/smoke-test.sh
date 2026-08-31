@@ -26,5 +26,7 @@ curl --fail --silent --show-error http://127.0.0.1:18080/health | grep -qx ok
 curl --fail --silent --show-error http://127.0.0.1:18080/ | grep -q "Dirk Smeets"
 curl --fail --silent --show-error --head http://127.0.0.1:18080/ \
     | grep -qi '^Content-Security-Policy:'
+curl --fail --silent --show-error --head http://127.0.0.1:18080/assets/site.css \
+    | grep -Eqi '^Cache-Control:.*no-cache'
 
 echo "Container smoke test passed."

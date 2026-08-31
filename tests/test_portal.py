@@ -55,7 +55,7 @@ class PortalTests(unittest.TestCase):
             self.assertIn(text, self.source)
 
         self.assertTrue((ROOT / "site" / "assets" / "dirk.jpg").is_file())
-        stylesheet = (ROOT / "site" / "assets" / "styles.css").read_text(
+        stylesheet = (ROOT / "site" / "assets" / "site.css").read_text(
             encoding="utf-8"
         )
         self.assertIn('/assets/dirk.jpg', stylesheet)
@@ -66,7 +66,7 @@ class PortalTests(unittest.TestCase):
             self.assertNotIn(excluded, lowered)
 
     def test_assets_are_local(self):
-        self.assertEqual(self.parser.stylesheets, ["/assets/styles.css"])
+        self.assertEqual(self.parser.stylesheets, ["/assets/site.css"])
         for image in self.parser.images:
             self.assertTrue(image.get("src", "").startswith("/assets/"))
             self.assertIn("alt", image)
