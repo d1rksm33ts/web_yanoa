@@ -13,6 +13,7 @@ class PortalParser(HTMLParser):
         self.links = []
         self.images = []
         self.stylesheets = []
+        self.scripts = []
         self.heading_levels = []
 
     def handle_starttag(self, tag, attrs):
@@ -23,6 +24,8 @@ class PortalParser(HTMLParser):
             self.images.append(attributes)
         if tag == "link" and attributes.get("rel") == "stylesheet":
             self.stylesheets.append(attributes.get("href"))
+        if tag == "script" and "src" in attributes:
+            self.scripts.append(attributes["src"])
         if tag in {"h1", "h2", "h3"}:
             self.heading_levels.append(int(tag[1]))
 
@@ -48,7 +51,7 @@ class PortalTests(unittest.TestCase):
             "Dirk Smeets",
             "Engineer",
             "Astrophotographer",
-            "Radio amateur",
+            "Radio Amateur",
             "mailto:dirk.smeets@yanoa.be",
             "tel:+32476691902",
         ):
@@ -75,8 +78,16 @@ class PortalTests(unittest.TestCase):
         self.assertEqual(self.source.count("<h1"), 1)
         self.assertEqual(self.parser.heading_levels[0], 1)
 
-    def test_no_runtime_javascript(self):
-        self.assertNotIn("<script", self.source.lower())
+    def test_animation_scripts_are_local(self):
+        self.assertEqual(
+            self.parser.scripts,
+            ["/assets/typed-2.0.12.min.js", "/assets/site.js"],
+        )
+        script = (ROOT / "site" / "assets" / "site.js").read_text(encoding="utf-8")
+        self.assertIn("typeSpeed: 100", script)
+        self.assertIn("backSpeed: 50", script)
+        self.assertIn("backDelay: 2000", script)
+        self.assertIn('history.scrollRestoration = "manual"', script)
 
 
 if __name__ == "__main__":

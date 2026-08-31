@@ -105,30 +105,15 @@ h1 {
   font-size: clamp(1.15rem, 2.4vw, 1.7rem);
 }
 
-.role-intro strong {
+.role-intro .typed {
   color: var(--blue);
-  font-weight: 650;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }
 
-.roles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  max-width: 42rem;
-  margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.roles li {
-  padding: 0.3rem 0.7rem;
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(57, 70, 82, 0.15);
-  border-radius: 999px;
-  backdrop-filter: blur(0.6rem);
-  font-size: 0.75rem;
-  font-weight: 750;
+.typed-cursor {
+  color: var(--blue);
+  font-weight: 400;
 }
 
 .contact-actions {
@@ -386,10 +371,6 @@ footer a {
 
   h1 {
     font-size: clamp(3.5rem, 17vw, 5rem);
-  }
-
-  .roles {
-    max-width: 33rem;
   }
 
   .contact-actions {

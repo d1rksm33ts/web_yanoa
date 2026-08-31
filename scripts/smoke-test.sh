@@ -28,5 +28,7 @@ curl --fail --silent --show-error --head http://127.0.0.1:18080/ \
     | grep -qi '^Content-Security-Policy:'
 curl --fail --silent --show-error --head http://127.0.0.1:18080/assets/site.css \
     | grep -Eqi '^Cache-Control:.*no-cache'
+curl --fail --silent --show-error http://127.0.0.1:18080/assets/site.js \
+    | grep -q 'typeSpeed: 100'
 
 echo "Container smoke test passed."
