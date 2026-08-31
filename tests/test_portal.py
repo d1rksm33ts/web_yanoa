@@ -50,12 +50,17 @@ class PortalTests(unittest.TestCase):
         for text in (
             "Dirk Smeets",
             "Engineer",
+            "Teacher",
             "Astrophotographer",
             "Radio Amateur",
             "mailto:dirk.smeets@yanoa.be",
-            "tel:+32476691902",
+            "https://www.instagram.com/d1rksm33ts/",
+            "https://www.astrobin.com/users/d1rksm33ts/",
         ):
             self.assertIn(text, self.source)
+
+        self.assertNotIn("tel:", self.source)
+        self.assertNotIn("Technologist", self.source)
 
         self.assertTrue((ROOT / "site" / "assets" / "dirk.jpg").is_file())
         stylesheet = (ROOT / "site" / "assets" / "site.css").read_text(
