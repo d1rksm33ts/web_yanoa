@@ -1,0 +1,26 @@
+name: web-yanoa
+
+services:
+  portal:
+    image: ${IMAGE_NAME:-web-yanoa}:${IMAGE_TAG:-local}
+    build:
+      context: .
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    expose:
+      - '8080'
+    networks:
+      edge:
+        aliases:
+          - web-yanoa
+
+networks:
+  edge:
+    external: true
+    name: yanoa-edge

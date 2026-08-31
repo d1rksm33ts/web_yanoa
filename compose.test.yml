@@ -1,0 +1,9 @@
+services:
+  portal:
+    ports:
+      - '127.0.0.1:18080:8080'
+
+networks:
+  edge:
+    external: false
+    name: web-yanoa-smoke-edge
