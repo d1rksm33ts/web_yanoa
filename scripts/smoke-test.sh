@@ -24,6 +24,13 @@ docker compose \
 
 curl --fail --silent --show-error http://127.0.0.1:18080/health | grep -qx ok
 curl --fail --silent --show-error http://127.0.0.1:18080/ | grep -q "Dirk Smeets"
+curl --fail --silent --show-error http://127.0.0.1:18080/ | grep -q 'application/ld+json'
+curl --fail --silent --show-error http://127.0.0.1:18080/sitemap.xml \
+    | grep -q 'https://yanoa.be/'
+curl --fail --silent --show-error http://127.0.0.1:18080/robots.txt \
+    | grep -q 'Sitemap: https://yanoa.be/sitemap.xml'
+test "$(curl --silent --output /dev/null --write-out '%{http_code}' \
+    http://127.0.0.1:18080/this-page-does-not-exist)" = 404
 curl --fail --silent --show-error --head http://127.0.0.1:18080/ \
     | grep -qi '^Content-Security-Policy:'
 curl --fail --silent --show-error --head http://127.0.0.1:18080/assets/site.css \

@@ -1,4 +1,5 @@
 from html.parser import HTMLParser
+import json
 from pathlib import Path
 import unittest
 
@@ -13,6 +14,7 @@ class PortalParser(HTMLParser):
         self.links = []
         self.images = []
         self.stylesheets = []
+        self.canonicals = []
         self.scripts = []
         self.heading_levels = []
 
@@ -24,6 +26,8 @@ class PortalParser(HTMLParser):
             self.images.append(attributes)
         if tag == "link" and attributes.get("rel") == "stylesheet":
             self.stylesheets.append(attributes.get("href"))
+        if tag == "link" and attributes.get("rel") == "canonical":
+            self.canonicals.append(attributes.get("href"))
         if tag == "script" and "src" in attributes:
             self.scripts.append(attributes["src"])
         if tag in {"h1", "h2", "h3"}:
@@ -86,7 +90,7 @@ class PortalTests(unittest.TestCase):
         self.assertNotIn("Open my Yanoa apps", self.source)
 
     def test_assets_are_local(self):
-        self.assertEqual(self.parser.stylesheets, ["/assets/site.css?v=20260902-6"])
+        self.assertEqual(self.parser.stylesheets, ["/assets/site.css?v=20260902-7"])
         for image in self.parser.images:
             self.assertTrue(image.get("src", "").startswith("/assets/"))
             self.assertIn("alt", image)
@@ -122,6 +126,41 @@ class PortalTests(unittest.TestCase):
             self.assertTrue((ROOT / "site" / "assets" / asset).is_file())
             self.assertIn(f'/assets/{asset}', stylesheet)
         self.assertIn("aspect-ratio: 16 / 9", stylesheet)
+
+    def test_search_metadata_identifies_dirk(self):
+        self.assertEqual(self.parser.canonicals, ["https://yanoa.be/"])
+        for text in (
+            "Dirk Smeets (ON1DGN) · YaNoa Engineering",
+            'name="robots" content="index, follow, max-image-preview:large"',
+            'property="og:type" content="profile"',
+            'property="og:url" content="https://yanoa.be/"',
+            'name="twitter:card" content="summary_large_image"',
+            'id="profile-title"',
+            "Belgian engineer",
+        ):
+            self.assertIn(text, self.source)
+
+    def test_profile_page_structured_data_is_valid(self):
+        marker = '<script type="application/ld+json">'
+        payload = self.source.split(marker, 1)[1].split("</script>", 1)[0]
+        structured_data = json.loads(payload)
+
+        self.assertEqual(structured_data["@type"], "ProfilePage")
+        person = structured_data["mainEntity"]
+        self.assertEqual(person["@type"], "Person")
+        self.assertEqual(person["name"], "Dirk Smeets")
+        self.assertEqual(person["alternateName"], "ON1DGN")
+        self.assertIn("https://www.qrz.com/db/ON1DGN", person["sameAs"])
+
+    def test_sitemap_and_robots_are_present(self):
+        sitemap = (ROOT / "site" / "sitemap.xml").read_text(encoding="utf-8")
+        robots = (ROOT / "site" / "robots.txt").read_text(encoding="utf-8")
+        nginx = (ROOT / "nginx.conf").read_text(encoding="utf-8")
+
+        self.assertIn("<loc>https://yanoa.be/</loc>", sitemap)
+        self.assertIn("Sitemap: https://yanoa.be/sitemap.xml", robots)
+        self.assertIn("try_files $uri $uri/ =404;", nginx)
+        self.assertNotIn("try_files $uri $uri/ /index.html;", nginx)
 
 
 if __name__ == "__main__":

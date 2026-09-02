@@ -21,7 +21,7 @@ The smoke test builds the production image, starts it temporarily on
 `127.0.0.1:18080`, checks the page, security headers, and health endpoint, then
 removes the test project.
 
-## Greenfield deployment
+## Production deployment
 
 The repository is deployed to:
 
@@ -35,6 +35,5 @@ Start it with:
 docker compose -p web-yanoa up -d --build
 ```
 
-Shared Caddy routes both the acceptance hostname and, after cutover,
-`yanoa.be` to `web-yanoa:8080`. `www.yanoa.be` permanently redirects to the
-apex hostname.
+Shared Caddy routes `yanoa.be` to `web-yanoa:8080`. `www.yanoa.be`
+permanently redirects to the apex hostname. Deploy through `ubuntu@yanoa.be`.
