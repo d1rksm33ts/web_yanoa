@@ -1,7 +1,7 @@
 # web_yanoa
 
-The public portal for the Yanoa product space. It links to Yanoa applications
-while deliberately excluding unrelated sites that merely share the same host.
+The public portal for the Yanoa product space. It separates Yanoa applications
+from independent websites created or hosted by Yanoa Engineering.
 
 ## Architecture
 
@@ -35,6 +35,6 @@ Start it with:
 docker compose -p web-yanoa up -d --build
 ```
 
-Shared Caddy routes `greenfield.yanoa.be` to `web-yanoa:8080` during
-acceptance. Production `yanoa.be` DNS and routing remain unchanged until the
-documented cutover gates have passed.
+Shared Caddy routes both the acceptance hostname and, after cutover,
+`yanoa.be` to `web-yanoa:8080`. `www.yanoa.be` permanently redirects to the
+apex hostname.

@@ -43,6 +43,8 @@ class PortalTests(unittest.TestCase):
             "https://racing.yanoa.be",
             "https://astro.yanoa.be",
             "https://telemetry.yanoa.be",
+            "https://dechapper.be",
+            "https://zonhoven-united.be",
         }
         self.assertTrue(expected.issubset(set(self.parser.links)))
 
@@ -52,10 +54,11 @@ class PortalTests(unittest.TestCase):
             "Engineer",
             "Teacher",
             "Astrophotographer",
-            "Radio Amateur",
+            "Radio Amateur - ON1DGN",
             "mailto:dirk.smeets@yanoa.be",
             "https://www.instagram.com/d1rksm33ts/",
             "https://www.astrobin.com/users/d1rksm33ts/",
+            "https://www.qrz.com/db/ON1DGN",
         ):
             self.assertIn(text, self.source)
 
@@ -68,13 +71,22 @@ class PortalTests(unittest.TestCase):
         )
         self.assertIn('/assets/dirk.jpg', stylesheet)
 
-    def test_unrelated_hosted_sites_are_absent(self):
-        lowered = self.source.lower()
-        for excluded in ("dechapper", "chapper.be", "zonhoven-united"):
-            self.assertNotIn(excluded, lowered)
+    def test_apps_and_websites_are_separate(self):
+        for text in (
+            'id="apps-title">YaNoa Apps',
+            'id="websites-title">Websites',
+            "Home Portal",
+            "YaNoAstro",
+            "YaNoa Racing",
+            "DeChapper",
+            "Zonhoven-United",
+        ):
+            self.assertIn(text, self.source)
+
+        self.assertNotIn("Open my Yanoa apps", self.source)
 
     def test_assets_are_local(self):
-        self.assertEqual(self.parser.stylesheets, ["/assets/site.css"])
+        self.assertEqual(self.parser.stylesheets, ["/assets/site.css?v=20260902-6"])
         for image in self.parser.images:
             self.assertTrue(image.get("src", "").startswith("/assets/"))
             self.assertIn("alt", image)
@@ -93,6 +105,23 @@ class PortalTests(unittest.TestCase):
         self.assertIn("backSpeed: 50", script)
         self.assertIn("backDelay: 2000", script)
         self.assertIn('history.scrollRestoration = "manual"', script)
+
+    def test_application_cards_use_visual_previews(self):
+        stylesheet = (ROOT / "site" / "assets" / "site.css").read_text(
+            encoding="utf-8"
+        )
+        self.assertTrue(
+            (ROOT / "site" / "assets" / "yanoa-racing-hero.webp").is_file()
+        )
+        self.assertIn('/assets/yanoa-racing-hero.webp', stylesheet)
+        for asset in (
+            "astro-m51.webp",
+            "dechapper-hero.webp",
+            "zonhoven-united-hero.webp",
+        ):
+            self.assertTrue((ROOT / "site" / "assets" / asset).is_file())
+            self.assertIn(f'/assets/{asset}', stylesheet)
+        self.assertIn("aspect-ratio: 16 / 9", stylesheet)
 
 
 if __name__ == "__main__":

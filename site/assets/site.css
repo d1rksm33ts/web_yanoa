@@ -147,7 +147,6 @@ h1 {
 }
 
 .social-links svg,
-.apps-action-icon svg,
 .app-icon svg {
   width: 1.35rem;
   fill: none;
@@ -183,36 +182,10 @@ h1 {
   stroke-width: 2.5;
 }
 
-.apps-action {
-  display: flex;
-  width: fit-content;
-  gap: 0.7rem;
-  align-items: center;
-  margin-top: 0.8rem;
-  padding: 0.72rem 1rem;
-  color: white;
-  background: var(--deep-ink);
-  border-radius: 999px;
-  font-size: 0.88rem;
-  font-weight: 750;
-  text-decoration: none;
-  transition: background 180ms ease, transform 180ms ease;
-}
-
-.apps-action:hover,
-.apps-action:focus-visible {
-  background: var(--blue);
-  outline: none;
-  transform: translateY(-2px);
-}
-
-.apps-action > span:last-child {
-  margin-left: 0.25rem;
-}
-
-.apps-action-icon {
-  display: grid;
-  place-items: center;
+.social-links .qrz-link span {
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: -0.045em;
 }
 
 .hero-logo {
@@ -266,19 +239,54 @@ h1 {
   gap: 1rem;
 }
 
+.destination-group + .destination-group {
+  margin-top: clamp(3rem, 7vw, 5rem);
+}
+
+.destination-group h3 {
+  margin: 0 0 1.25rem;
+  color: var(--deep-ink);
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  letter-spacing: -0.04em;
+}
+
 .app-card {
   --accent: var(--blue);
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 1rem;
-  align-items: center;
-  min-height: 8.5rem;
-  padding: 1.25rem;
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid var(--line);
+  align-items: end;
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  overflow: hidden;
+  padding: clamp(1.2rem, 3vw, 1.65rem);
+  color: white;
+  background: #17212a;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--radius);
   text-decoration: none;
   transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.app-card::before,
+.app-card::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.app-card::before {
+  z-index: -2;
+  background-position: center;
+  background-size: cover;
+  transition: transform 500ms ease;
+}
+
+.app-card::after {
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(9, 16, 22, 0.02) 20%, rgba(9, 16, 22, 0.26) 58%, rgba(9, 16, 22, 0.92) 100%);
 }
 
 .app-card:hover,
@@ -289,19 +297,68 @@ h1 {
   transform: translateY(-0.3rem);
 }
 
+.app-card:hover::before,
+.app-card:focus-visible::before {
+  transform: scale(1.035);
+}
+
 .home-card { --accent: var(--cyan); }
 .racing-card { --accent: var(--red); }
 .astro-card { --accent: var(--violet); }
 .telemetry-card { --accent: var(--amber); }
+.dechapper-card { --accent: #f08a3e; }
+.zonhoven-card { --accent: #78c14b; }
+
+.racing-card::before {
+  background-image: url("/assets/yanoa-racing-hero.webp");
+  background-position: center 42%;
+}
+
+.home-card::before {
+  background:
+    radial-gradient(circle at 77% 25%, rgba(188, 255, 235, 0.9) 0 5%, transparent 5.5%),
+    linear-gradient(35deg, transparent 0 42%, rgba(170, 249, 255, 0.2) 42.2% 43%, transparent 43.2% 100%),
+    linear-gradient(145deg, transparent 0 50%, rgba(255, 255, 255, 0.18) 50.2% 51%, transparent 51.2% 100%),
+    repeating-linear-gradient(90deg, rgba(196, 247, 255, 0.08) 0 1px, transparent 1px 3rem),
+    repeating-linear-gradient(0deg, rgba(196, 247, 255, 0.08) 0 1px, transparent 1px 3rem),
+    linear-gradient(135deg, #0b667e, #123247 62%, #071c2a);
+}
+
+.astro-card::before {
+  background-image: url("/assets/astro-m51.webp");
+  background-position: center;
+}
+
+.telemetry-card::before {
+  background:
+    linear-gradient(116deg, transparent 0 16%, rgba(255, 188, 52, 0.9) 16.2% 17%, transparent 17.2% 37%, rgba(42, 226, 179, 0.78) 37.2% 38%, transparent 38.2%),
+    linear-gradient(66deg, transparent 0 47%, rgba(255, 255, 255, 0.52) 47.2% 47.7%, transparent 48%),
+    repeating-linear-gradient(90deg, rgba(139, 229, 222, 0.1) 0 1px, transparent 1px 2.5rem),
+    repeating-linear-gradient(0deg, rgba(139, 229, 222, 0.1) 0 1px, transparent 1px 2.5rem),
+    radial-gradient(circle at 75% 35%, rgba(31, 222, 181, 0.26), transparent 26%),
+    linear-gradient(135deg, #092c34, #10202b 65%, #07151d);
+}
+
+.dechapper-card::before {
+  background-image: url("/assets/dechapper-hero.webp");
+  background-position: center 46%;
+}
+
+.zonhoven-card::before {
+  background-image: url("/assets/zonhoven-united-hero.webp");
+  background-position: center 44%;
+}
 
 .app-icon {
   display: grid;
   width: 3.6rem;
   height: 3.6rem;
   place-items: center;
-  color: var(--accent);
-  background: color-mix(in srgb, var(--accent) 11%, white);
+  color: white;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 1rem;
+  backdrop-filter: blur(0.7rem);
 }
 
 .app-copy {
@@ -310,8 +367,8 @@ h1 {
 
 .app-copy strong {
   display: block;
-  color: var(--deep-ink);
-  font-size: 1.3rem;
+  color: white;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
   letter-spacing: -0.025em;
 }
 
@@ -319,15 +376,15 @@ h1 {
   display: block;
   margin-top: 0.15rem;
   overflow: hidden;
-  color: var(--muted);
-  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.92rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .app-arrow {
-  color: var(--accent);
-  font-size: 1.35rem;
+  color: white;
+  font-size: 1.5rem;
 }
 
 footer {

@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#eef3f6">
   <title>Dirk Smeets · Yanoa Engineering</title>
   <link rel="icon" href="/assets/yanoa-logo.png">
-  <link rel="stylesheet" href="/assets/site.css">
+  <link rel="stylesheet" href="/assets/site.css?v=20260902-6">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -17,7 +17,7 @@
       <div class="hero-content">
         <p class="eyebrow">Yanoa Engineering · Belgium</p>
         <h1 id="hero-title">Dirk Smeets</h1>
-        <p class="role-intro">I’m <span class="typed" data-typed-items="an Engineer, a Creator, a Developer, a Scientist, a Teacher, an Astrophotographer, a Radio Amateur, Human .... -:)">an Engineer</span></p>
+        <p class="role-intro">I’m <span class="typed" data-typed-items="an Engineer, a Creator, a Developer, a Scientist, a Teacher, an Astrophotographer, a Radio Amateur - ON1DGN, Human .... -:)">an Engineer</span></p>
 
         <nav class="social-links" aria-label="Contact Dirk and view his profiles">
           <a href="mailto:dirk.smeets@yanoa.be" aria-label="Email Dirk" title="Email Dirk">
@@ -34,15 +34,10 @@
               <path class="astrobin-a" d="m36 50 7-19h5l7 19h-5l-1.4-4h-6.5l-1.4 4zm7.6-8h3.6l-1.8-5.5z"/>
             </svg>
           </a>
+          <a class="qrz-link" href="https://www.qrz.com/db/ON1DGN" target="_blank" rel="me noopener noreferrer" aria-label="ON1DGN on QRZ" title="QRZ">
+            <span aria-hidden="true">QRZ</span>
+          </a>
         </nav>
-
-        <a class="apps-action" href="#applications">
-          <span class="apps-action-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-          </span>
-          Open my Yanoa apps
-          <span aria-hidden="true">↓</span>
-        </a>
 
         <img class="hero-logo" src="/assets/yanoa-logo.png" alt="Yanoa Engineering">
       </div>
@@ -53,43 +48,67 @@
         <header class="section-heading">
           <div>
             <p class="eyebrow">My digital workspace</p>
-            <h2 id="applications-title">Yanoa Apps</h2>
+            <h2 id="applications-title">YaNoa Network</h2>
           </div>
-          <p>Tools and projects I use, build and keep evolving.</p>
+          <p>Applications I build and websites I create, host and keep evolving.</p>
         </header>
 
-        <div class="app-grid">
-          <a class="app-card home-card" href="https://home.yanoa.be">
-            <span class="app-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
-            </span>
-            <span class="app-copy"><strong>Home</strong><small>Connected home and energy</small></span>
-            <span class="app-arrow" aria-hidden="true">↗</span>
-          </a>
+        <div class="destination-group" aria-labelledby="apps-title">
+          <h3 id="apps-title">YaNoa Apps</h3>
+          <div class="app-grid">
+            <a class="app-card home-card" href="https://home.yanoa.be">
+              <span class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+              </span>
+              <span class="app-copy"><strong>Home Portal</strong><small>Connected home and energy</small></span>
+              <span class="app-arrow" aria-hidden="true">↗</span>
+            </a>
 
-          <a class="app-card racing-card" href="https://racing.yanoa.be">
-            <span class="app-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M5 3v18M6 5h11l-2 3 2 3H6z"/></svg>
-            </span>
-            <span class="app-copy"><strong>Racing</strong><small>Timing and race-day tools</small></span>
-            <span class="app-arrow" aria-hidden="true">↗</span>
-          </a>
+            <a class="app-card telemetry-card" href="https://telemetry.yanoa.be">
+              <span class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V3"/></svg>
+              </span>
+              <span class="app-copy"><strong>Telemetry</strong><small>Devices and live data</small></span>
+              <span class="app-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
 
-          <a class="app-card astro-card" href="https://astro.yanoa.be">
-            <span class="app-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z"/><path d="m16.5 3 .5 1.5 1.5.5-1.5.5-.5 1.5-.5-1.5-1.5-.5 1.5-.5z"/></svg>
-            </span>
-            <span class="app-copy"><strong>Astro</strong><small>Imaging and the night sky</small></span>
-            <span class="app-arrow" aria-hidden="true">↗</span>
-          </a>
+        <div class="destination-group" aria-labelledby="websites-title">
+          <h3 id="websites-title">Websites</h3>
+          <div class="app-grid">
+            <a class="app-card astro-card" href="https://astro.yanoa.be">
+              <span class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z"/><path d="m16.5 3 .5 1.5 1.5.5-1.5.5-.5 1.5-.5-1.5-1.5-.5 1.5-.5z"/></svg>
+              </span>
+              <span class="app-copy"><strong>YaNoAstro</strong><small>Astrophotography and the night sky</small></span>
+              <span class="app-arrow" aria-hidden="true">↗</span>
+            </a>
 
-          <a class="app-card telemetry-card" href="https://telemetry.yanoa.be">
-            <span class="app-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-7m5 7V3"/></svg>
-            </span>
-            <span class="app-copy"><strong>Telemetry</strong><small>Devices and live data</small></span>
-            <span class="app-arrow" aria-hidden="true">↗</span>
-          </a>
+            <a class="app-card racing-card" href="https://racing.yanoa.be">
+              <span class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 3v18M6 5h11l-2 3 2 3H6z"/></svg>
+              </span>
+              <span class="app-copy"><strong>YaNoa Racing</strong><small>Noah Smeets · Race pilot</small></span>
+              <span class="app-arrow" aria-hidden="true">↗</span>
+            </a>
+
+            <a class="app-card dechapper-card" href="https://dechapper.be">
+              <span class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 17h16M6 13h12M8 9h8M10 5h4"/></svg>
+              </span>
+              <span class="app-copy"><strong>DeChapper</strong><small>Chapewerken and floor insulation</small></span>
+              <span class="app-arrow" aria-hidden="true">↗</span>
+            </a>
+
+            <a class="app-card zonhoven-card" href="https://zonhoven-united.be">
+              <span class="app-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 4 6v5c0 5 3.4 8.2 8 10 4.6-1.8 8-5 8-10V6z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg>
+              </span>
+              <span class="app-copy"><strong>Zonhoven-United</strong><small>Community and club website</small></span>
+              <span class="app-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
 
         <footer>
