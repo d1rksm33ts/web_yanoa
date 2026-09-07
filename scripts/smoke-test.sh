@@ -29,6 +29,8 @@ curl --fail --silent --show-error http://127.0.0.1:18080/sitemap.xml \
     | grep -q 'https://yanoa.be/'
 curl --fail --silent --show-error http://127.0.0.1:18080/robots.txt \
     | grep -q 'Sitemap: https://yanoa.be/sitemap.xml'
+curl --fail --silent --show-error http://127.0.0.1:18080/static/online.txt \
+    | grep -qx online
 test "$(curl --silent --output /dev/null --write-out '%{http_code}' \
     http://127.0.0.1:18080/this-page-does-not-exist)" = 404
 curl --fail --silent --show-error --head http://127.0.0.1:18080/ \

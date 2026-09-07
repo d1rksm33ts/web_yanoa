@@ -162,6 +162,11 @@ class PortalTests(unittest.TestCase):
         self.assertIn("try_files $uri $uri/ =404;", nginx)
         self.assertNotIn("try_files $uri $uri/ /index.html;", nginx)
 
+    def test_telemetry_connectivity_probe_is_present(self):
+        probe = ROOT / "site" / "static" / "online.txt"
+
+        self.assertEqual(probe.read_text(encoding="utf-8"), "online\n")
+
 
 if __name__ == "__main__":
     unittest.main()
