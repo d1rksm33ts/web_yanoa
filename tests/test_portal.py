@@ -55,6 +55,8 @@ class PortalTests(unittest.TestCase):
     def test_personal_identity_and_contact_are_primary_content(self):
         for text in (
             "Dirk Smeets",
+            "also known as",
+            "d1rksm33ts",
             "Engineer",
             "Teacher",
             "Astrophotographer",
@@ -90,7 +92,7 @@ class PortalTests(unittest.TestCase):
         self.assertNotIn("Open my Yanoa apps", self.source)
 
     def test_assets_are_local(self):
-        self.assertEqual(self.parser.stylesheets, ["/assets/site.css?v=20260902-7"])
+        self.assertEqual(self.parser.stylesheets, ["/assets/site.css?v=20260913-1"])
         for image in self.parser.images:
             self.assertTrue(image.get("src", "").startswith("/assets/"))
             self.assertIn("alt", image)
@@ -149,7 +151,7 @@ class PortalTests(unittest.TestCase):
         person = structured_data["mainEntity"]
         self.assertEqual(person["@type"], "Person")
         self.assertEqual(person["name"], "Dirk Smeets")
-        self.assertEqual(person["alternateName"], "ON1DGN")
+        self.assertEqual(person["alternateName"], ["ON1DGN", "d1rksm33ts"])
         self.assertIn("https://www.qrz.com/db/ON1DGN", person["sameAs"])
 
     def test_sitemap_and_robots_are_present(self):
