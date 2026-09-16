@@ -46,7 +46,7 @@ class PortalTests(unittest.TestCase):
             "https://home.yanoa.be",
             "https://racing.yanoa.be",
             "https://astro.yanoa.be",
-            "https://telemetry.yanoa.be",
+            "https://telemetry.yanoa.be/grafana/d/legacy-energy-dirk",
             "https://dechapper.be",
             "https://zonhoven-united.be",
         }
