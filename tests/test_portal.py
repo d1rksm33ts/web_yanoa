@@ -128,6 +128,13 @@ class PortalTests(unittest.TestCase):
             self.assertTrue((ROOT / "site" / "assets" / asset).is_file())
             self.assertIn(f'/assets/{asset}', stylesheet)
         self.assertIn("aspect-ratio: 16 / 9", stylesheet)
+        for preview in (
+            'class="app-preview home-preview"',
+            'class="app-preview telemetry-preview"',
+            'class="telemetry-preview__chart"',
+            'class="home-preview__rooms"',
+        ):
+            self.assertIn(preview, self.source)
 
     def test_search_metadata_identifies_dirk(self):
         self.assertEqual(self.parser.canonicals, ["https://yanoa.be/"])
