@@ -1,4 +1,4 @@
-FROM nginx:1.31.4-alpine3.24@sha256:db35bfc6b2951e7f8a72db5db120288c127ffaeeb4a6d4b95a26fead017d5913
+FROM nginx:1.31.6-alpine3.24@sha256:adad2ae9204d0fd7a34f40299bc838c3782be1293b10005eac4315ff5a1abf4e
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY site/ /usr/share/nginx/html/
