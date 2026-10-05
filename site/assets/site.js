@@ -27,3 +27,16 @@ if (typedElement && window.Typed) {
     backDelay: 2000,
   });
 }
+
+// Project images start downloading near their cards, after the hero.
+if ('IntersectionObserver' in window) {
+  window.yanoaCardObserverReady = true;
+  const cardImages = new IntersectionObserver((entries, observer) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('card-image-ready');
+      observer.unobserve(entry.target);
+    }
+  }, { rootMargin: '250px' });
+  document.querySelectorAll('.app-card').forEach(card => cardImages.observe(card));
+}

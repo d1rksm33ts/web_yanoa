@@ -56,7 +56,7 @@ a {
   align-items: center;
   min-height: 100svh;
   overflow: hidden;
-  background-image: url("/assets/dirk.jpg");
+  background-image: url("/assets/dirk.webp");
   background-position: center center;
   background-size: cover;
 }
@@ -360,7 +360,7 @@ h1 {
 .dechapper-card { --accent: #f08a3e; }
 .zonhoven-card { --accent: #78c14b; }
 
-.racing-card::before {
+html:not(.defer-card-images) .racing-card::before, .racing-card.card-image-ready::before {
   background-image: url("/assets/yanoa-racing-hero.webp");
   background-position: center 42%;
 }
@@ -369,7 +369,7 @@ h1 {
   background: linear-gradient(145deg, #14384a, #0a1e2a 72%);
 }
 
-.astro-card::before {
+html:not(.defer-card-images) .astro-card::before, .astro-card.card-image-ready::before {
   background-image: url("/assets/astro-m51.webp");
   background-position: center;
 }
@@ -568,12 +568,12 @@ h1 {
 .telemetry-preview__stats > span:first-child { padding-left: 1.7em; }
 .telemetry-preview__stats > span:first-child i { position: absolute; top: 1.05em; left: 0.75em; }
 
-.dechapper-card::before {
+html:not(.defer-card-images) .dechapper-card::before, .dechapper-card.card-image-ready::before {
   background-image: url("/assets/dechapper-hero.webp");
   background-position: center 46%;
 }
 
-.zonhoven-card::before {
+html:not(.defer-card-images) .zonhoven-card::before, .zonhoven-card.card-image-ready::before {
   background-image: url("/assets/zonhoven-united-hero.webp");
   background-position: center 44%;
 }
