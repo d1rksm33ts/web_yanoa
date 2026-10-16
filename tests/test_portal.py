@@ -2,6 +2,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import unittest
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,11 +72,11 @@ class PortalTests(unittest.TestCase):
         self.assertNotIn("tel:", self.source)
         self.assertNotIn("Technologist", self.source)
 
-        self.assertTrue((ROOT / "site" / "assets" / "dirk.jpg").is_file())
+        self.assertTrue((ROOT / "site" / "assets" / "dirk.webp").is_file())
         stylesheet = (ROOT / "site" / "assets" / "site.css").read_text(
             encoding="utf-8"
         )
-        self.assertIn('/assets/dirk.jpg', stylesheet)
+        self.assertIn('/assets/dirk.webp', stylesheet)
 
     def test_apps_and_websites_are_separate(self):
         for text in (
@@ -92,7 +93,12 @@ class PortalTests(unittest.TestCase):
         self.assertNotIn("Open my Yanoa apps", self.source)
 
     def test_assets_are_local(self):
-        self.assertEqual(self.parser.stylesheets, ["/assets/site.css?v=20260913-1"])
+        self.assertEqual(len(self.parser.stylesheets), 1)
+        stylesheet = urlsplit(self.parser.stylesheets[0])
+        self.assertEqual(stylesheet.scheme, "")
+        self.assertEqual(stylesheet.netloc, "")
+        self.assertEqual(stylesheet.path, "/assets/site.css")
+        self.assertTrue((ROOT / "site" / stylesheet.path.lstrip("/")).is_file())
         for image in self.parser.images:
             self.assertTrue(image.get("src", "").startswith("/assets/"))
             self.assertIn("alt", image)
